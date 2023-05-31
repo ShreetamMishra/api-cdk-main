@@ -1,19 +1,66 @@
 service: notes-api
+
 package:
   individually: true
+
 plugins:
-  - serverless-bundle # Package our functions with Webpack
+  - serverless-bundle
   - serverless-offline
-  - serverless-dotenv-plugin # Load .env as environment variables
+  - serverless-dotenv-plugin
+
 provider:
   name: aws
   runtime: nodejs18.x
   stage: prod
-  region: us-east-1
+  region: ap-south-1
+
+environment:
+  tableName: notes
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:Scan
+      - dynamodb:Query
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:UpdateItem
+      - dynamodb:DeleteItem
+      - dynamodb:DescribeTable
+    Resource: "arn:aws:dynamodb:us-east-1:*:*"
+
 functions:
-  hello:
-    handler: handler.hello
+  create:
+    handler: create.main
     events:
       - http:
-          path: hello
+          path: notes
+          method: post
+
+  get:
+    handler: get.main
+    events:
+      - http:
+          path: notes/{id}
           method: get
+
+  list:
+    handler: list.main
+    events:
+      - http:
+          path: notes
+          method: get
+
+  update:
+    handler: update.main
+    events:
+      - http:
+          path: notes/{id}
+          method: put
+
+  delete:
+    handler: delete.main
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
