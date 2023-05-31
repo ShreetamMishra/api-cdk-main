@@ -27,7 +27,7 @@ iamRoleStatements:
       - dynamodb:UpdateItem
       - dynamodb:DeleteItem
       - dynamodb:DescribeTable
-    Resource: "arn:aws:dynamodb:us-east-1:*:*"
+    Resource: "arn:aws:dynamodb:ap-south-1:*:*"
 
 functions:
   create:
@@ -64,3 +64,4 @@ functions:
       - http:
           path: notes/{id}
           method: delete
+          
