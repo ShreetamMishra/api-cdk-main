@@ -12,6 +12,7 @@ provider:
   name: aws
   runtime: nodejs16.x
   stage: prod
+<<<<<<< HEAD
   region: ap-south-1
 
   environment:
@@ -24,6 +25,24 @@ provider:
           Action:
             - "dynamodb:*"
           Resource: "*"
+=======
+  region: us-east-1
+
+environment:
+  tableName: notes
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:Scan
+      - dynamodb:Query
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:UpdateItem
+      - dynamodb:DeleteItem
+      - dynamodb:DescribeTable
+    Resource: "arn:aws:dynamodb:us-east-1:*:*"
+>>>>>>> a85d214b736d3951b0786219669a1549849c111f
 
 functions:
   create:
