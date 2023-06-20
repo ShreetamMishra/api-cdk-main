@@ -78,34 +78,36 @@ functions:
           cors: true
           authorizer: aws_iam
 resources:
-  Resources:
-   NotesTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: userId
-          AttributeType: S
-        - AttributeName: todoId
-          AttributeType: S
-        - AttributeName: createdAt
-          AttributeType: S
-      KeySchema:
-        - AttributeName: userId
-          KeyType: HASH
-        - AttributeName: todoId
-          KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
-      LocalSecondaryIndexes:
-        - IndexName: CreatedAtIndex
-          KeySchema:
-            - AttributeName: userId
-              KeyType: HASH
-            - AttributeName: createdAt
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
+  - ${file(resources/api-gateway-errors.yml)}
+  - ${file(resources/cognito-policy.yml)}
+  #Resources:
+   #NotesTable:
+    #Type: AWS::DynamoDB::Table
+    #Properties:
+      #AttributeDefinitions:
+        #- AttributeName: userId
+        #  AttributeType: S
+        #- AttributeName: todoId
+        #  AttributeType: S
+       # - AttributeName: createdAt
+        #  AttributeType: S
+      #KeySchema:
+       # - AttributeName: userId
+       #   KeyType: HASH
+        #- AttributeName: todoId
+         # KeyType: RANGE
+      #ProvisionedThroughput:
+       # ReadCapacityUnits: 5
+       # WriteCapacityUnits: 5
+     # LocalSecondaryIndexes:
+       # - IndexName: CreatedAtIndex
+        #  KeySchema:
+         #   - AttributeName: userId
+           #   KeyType: HASH
+            #- AttributeName: createdAt
+              #KeyType: RANGE
+          #Projection:
+           # ProjectionType: ALL
   
   # Create our resources with separate CloudFormation templates
   # API Gateway Errors
