@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    
     "start": "sst start",
     "build": "sst build",
     "deploy": "sst deploy",
@@ -19,8 +18,9 @@
     "@serverless-stack/cli": "0.69.7",
     "@serverless-stack/resources": "0.69.7",
     "aws-cdk-lib": "2.15.0",
+    "constructs": "^10.2.55",
     "serverless-stack": "^0.1.0"
-    },
+  },
   "devDependencies": {
     "jest": "^27.5.1",
     "vitest": "^0.32.2"
