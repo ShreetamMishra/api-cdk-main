@@ -26,6 +26,7 @@
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
     "serverless": "^3.32.2",
+    "aws-cdk-lib": "2.15.0",
     "stripe": "^12.8.0"
   }
 }
