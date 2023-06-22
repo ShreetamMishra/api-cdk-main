@@ -12,7 +12,8 @@
       "environment": {
         "tableName": {
           "Fn::ImportValue": "dev-notes-infra-TableName"
-        }
+        },
+        "MY_ENV_VAR": "i-am-an-environment-variable"
       },
       "iam": {
         "role": {
@@ -22,7 +23,11 @@
               "Action": [
                 "dynamodb:*"
               ],
-              "Resource": "*"
+              "Resource": [
+                {
+                  "Fn::ImportValue": "dev-notes-infra-TableArn"
+                }
+              ]
             }
           ]
         }
@@ -219,7 +224,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/notes-api/dev/1687369523755-2023-06-21T17:45:23.755Z/create.zip"
+                "S3Key": "serverless/notes-api/dev/1687444366482-2023-06-22T14:32:46.482Z/create.zip"
               },
               "Handler": "create.main",
               "Runtime": "nodejs16.x",
@@ -230,7 +235,8 @@
                 "Variables": {
                   "tableName": {
                     "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"tableName\"]"
-                  }
+                  },
+                  "MY_ENV_VAR": "i-am-an-environment-variable"
                 }
               },
               "Role": {
@@ -251,7 +257,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/notes-api/dev/1687369523755-2023-06-21T17:45:23.755Z/get.zip"
+                "S3Key": "serverless/notes-api/dev/1687444366482-2023-06-22T14:32:46.482Z/get.zip"
               },
               "Handler": "get.main",
               "Runtime": "nodejs16.x",
@@ -262,7 +268,8 @@
                 "Variables": {
                   "tableName": {
                     "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"tableName\"]"
-                  }
+                  },
+                  "MY_ENV_VAR": "i-am-an-environment-variable"
                 }
               },
               "Role": {
@@ -283,7 +290,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/notes-api/dev/1687369523755-2023-06-21T17:45:23.755Z/list.zip"
+                "S3Key": "serverless/notes-api/dev/1687444366482-2023-06-22T14:32:46.482Z/list.zip"
               },
               "Handler": "list.main",
               "Runtime": "nodejs16.x",
@@ -294,7 +301,8 @@
                 "Variables": {
                   "tableName": {
                     "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"tableName\"]"
-                  }
+                  },
+                  "MY_ENV_VAR": "i-am-an-environment-variable"
                 }
               },
               "Role": {
@@ -315,7 +323,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/notes-api/dev/1687369523755-2023-06-21T17:45:23.755Z/update.zip"
+                "S3Key": "serverless/notes-api/dev/1687444366482-2023-06-22T14:32:46.482Z/update.zip"
               },
               "Handler": "update.main",
               "Runtime": "nodejs16.x",
@@ -326,7 +334,8 @@
                 "Variables": {
                   "tableName": {
                     "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"tableName\"]"
-                  }
+                  },
+                  "MY_ENV_VAR": "i-am-an-environment-variable"
                 }
               },
               "Role": {
@@ -347,7 +356,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/notes-api/dev/1687369523755-2023-06-21T17:45:23.755Z/delete.zip"
+                "S3Key": "serverless/notes-api/dev/1687444366482-2023-06-22T14:32:46.482Z/delete.zip"
               },
               "Handler": "delete.main",
               "Runtime": "nodejs16.x",
@@ -358,7 +367,8 @@
                 "Variables": {
                   "tableName": {
                     "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"tableName\"]"
-                  }
+                  },
+                  "MY_ENV_VAR": "i-am-an-environment-variable"
                 }
               },
               "Role": {
@@ -372,7 +382,7 @@
               "DeleteLogGroup"
             ]
           },
-          "CreateLambdaVersionHIJciKmkYkQuKOUjrY7wqLgZkfdRoo0vN4WyLzDnw0": {
+          "CreateLambdaVersionxkv3YjM8BNHMSxoJL2u2vOAWdPLbTH8q5UCSGgIap5k": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -382,27 +392,7 @@
               "CodeSha256": "pacNAptgVo4X7Cd/cwixdP5hGYTHYhZVmW+v3cLFTzg="
             }
           },
-          "UpdateLambdaVersiondKQ6BbaTtoxLosDav7lvKaagkxzciEmki4ijnsfarL8": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "UpdateLambdaFunction"
-              },
-              "CodeSha256": "EJUePAgaZSSORLFlNkR5LhFR8ARsJb+IQWULmko54r8="
-            }
-          },
-          "ListLambdaVersionDq7kJaIJxX68rHwtMDfDTDELLGoN7dRTCyys2x9jBA": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "ListLambdaFunction"
-              },
-              "CodeSha256": "bUNdt/QIDZUquumRw/xA6PL/t4C/Vmo/5V/eA02dzXY="
-            }
-          },
-          "DeleteLambdaVersionpxilzsg5VWl26WUP3qtBBvCb8OO93uqB4xJTmLPW7M": {
+          "DeleteLambdaVersion57NVUbl0CLSJbUQb8YjIbuCFTjvI0OYWPDavlbINQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -412,7 +402,7 @@
               "CodeSha256": "c8nvdLtoa4kDBlVM0SMR2UGvITgavKtezyLZ10Z268A="
             }
           },
-          "GetLambdaVersionNRx18aDNTA4RrKlTA9rYvl2pW833AmxOWvxuO6JbrU": {
+          "GetLambdaVersionhVgG4bx38D335n4bTftwOp5EW5ukXeNLNU5U8kxJpaU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -420,6 +410,26 @@
                 "Ref": "GetLambdaFunction"
               },
               "CodeSha256": "L0jbxdaOejEPM3CwKQbdq3R6fUTgPI0NTTOl5djb9+w="
+            }
+          },
+          "ListLambdaVersionrjsNzUkdUvIy680502HdjFLR2jqEPVAkFMEZdMjFbg": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ListLambdaFunction"
+              },
+              "CodeSha256": "bUNdt/QIDZUquumRw/xA6PL/t4C/Vmo/5V/eA02dzXY="
+            }
+          },
+          "UpdateLambdaVersionaqbw3niTDPV4sc1FueYXIYUGXsA0See342LMkFQ3I": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateLambdaFunction"
+              },
+              "CodeSha256": "EJUePAgaZSSORLFlNkR5LhFR8ARsJb+IQWULmko54r8="
             }
           },
           "ApiGatewayRestApi": {
@@ -781,7 +791,7 @@
               "DeleteLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1687369517870": {
+          "ApiGatewayDeployment1687444358610": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1048,34 +1058,16 @@
           "CreateLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateLambdaVersionHIJciKmkYkQuKOUjrY7wqLgZkfdRoo0vN4WyLzDnw0"
+              "Ref": "CreateLambdaVersionxkv3YjM8BNHMSxoJL2u2vOAWdPLbTH8q5UCSGgIap5k"
             },
             "Export": {
               "Name": "sls-notes-api-dev-CreateLambdaFunctionQualifiedArn"
             }
           },
-          "UpdateLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "UpdateLambdaVersiondKQ6BbaTtoxLosDav7lvKaagkxzciEmki4ijnsfarL8"
-            },
-            "Export": {
-              "Name": "sls-notes-api-dev-UpdateLambdaFunctionQualifiedArn"
-            }
-          },
-          "ListLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "ListLambdaVersionDq7kJaIJxX68rHwtMDfDTDELLGoN7dRTCyys2x9jBA"
-            },
-            "Export": {
-              "Name": "sls-notes-api-dev-ListLambdaFunctionQualifiedArn"
-            }
-          },
           "DeleteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteLambdaVersionpxilzsg5VWl26WUP3qtBBvCb8OO93uqB4xJTmLPW7M"
+              "Ref": "DeleteLambdaVersion57NVUbl0CLSJbUQb8YjIbuCFTjvI0OYWPDavlbINQ"
             },
             "Export": {
               "Name": "sls-notes-api-dev-DeleteLambdaFunctionQualifiedArn"
@@ -1084,10 +1076,28 @@
           "GetLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetLambdaVersionNRx18aDNTA4RrKlTA9rYvl2pW833AmxOWvxuO6JbrU"
+              "Ref": "GetLambdaVersionhVgG4bx38D335n4bTftwOp5EW5ukXeNLNU5U8kxJpaU"
             },
             "Export": {
               "Name": "sls-notes-api-dev-GetLambdaFunctionQualifiedArn"
+            }
+          },
+          "ListLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ListLambdaVersionrjsNzUkdUvIy680502HdjFLR2jqEPVAkFMEZdMjFbg"
+            },
+            "Export": {
+              "Name": "sls-notes-api-dev-ListLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdateLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateLambdaVersionaqbw3niTDPV4sc1FueYXIYUGXsA0See342LMkFQ3I"
+            },
+            "Export": {
+              "Name": "sls-notes-api-dev-UpdateLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -1269,7 +1279,7 @@
         "timeout": 6,
         "runtime": "nodejs16.x",
         "vpc": {},
-        "versionLogicalId": "CreateLambdaVersionHIJciKmkYkQuKOUjrY7wqLgZkfdRoo0vN4WyLzDnw0"
+        "versionLogicalId": "CreateLambdaVersionxkv3YjM8BNHMSxoJL2u2vOAWdPLbTH8q5UCSGgIap5k"
       },
       "get": {
         "handler": "get.main",
@@ -1312,7 +1322,7 @@
         "timeout": 6,
         "runtime": "nodejs16.x",
         "vpc": {},
-        "versionLogicalId": "GetLambdaVersionNRx18aDNTA4RrKlTA9rYvl2pW833AmxOWvxuO6JbrU"
+        "versionLogicalId": "GetLambdaVersionhVgG4bx38D335n4bTftwOp5EW5ukXeNLNU5U8kxJpaU"
       },
       "list": {
         "handler": "list.main",
@@ -1355,7 +1365,7 @@
         "timeout": 6,
         "runtime": "nodejs16.x",
         "vpc": {},
-        "versionLogicalId": "ListLambdaVersionDq7kJaIJxX68rHwtMDfDTDELLGoN7dRTCyys2x9jBA"
+        "versionLogicalId": "ListLambdaVersionrjsNzUkdUvIy680502HdjFLR2jqEPVAkFMEZdMjFbg"
       },
       "update": {
         "handler": "update.main",
@@ -1398,7 +1408,7 @@
         "timeout": 6,
         "runtime": "nodejs16.x",
         "vpc": {},
-        "versionLogicalId": "UpdateLambdaVersiondKQ6BbaTtoxLosDav7lvKaagkxzciEmki4ijnsfarL8"
+        "versionLogicalId": "UpdateLambdaVersionaqbw3niTDPV4sc1FueYXIYUGXsA0See342LMkFQ3I"
       },
       "delete": {
         "handler": "delete.main",
@@ -1441,7 +1451,7 @@
         "timeout": 6,
         "runtime": "nodejs16.x",
         "vpc": {},
-        "versionLogicalId": "DeleteLambdaVersionpxilzsg5VWl26WUP3qtBBvCb8OO93uqB4xJTmLPW7M"
+        "versionLogicalId": "DeleteLambdaVersion57NVUbl0CLSJbUQb8YjIbuCFTjvI0OYWPDavlbINQ"
       }
     },
     "resources": {
@@ -1508,7 +1518,7 @@
       "package": {
         "individually": true,
         "artifactsS3KeyDirname": "serverless/notes-api/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/notes-api/dev/1687369523755-2023-06-21T17:45:23.755Z"
+        "artifactDirectoryName": "serverless/notes-api/dev/1687444366482-2023-06-22T14:32:46.482Z"
       },
       "plugins": {
         "$ref": "$[\"service\"][\"plugins\"]"
@@ -1531,7 +1541,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/notes-api/dev/1687369523755-2023-06-21T17:45:23.755Z",
+    "artifactDirectoryName": "serverless/notes-api/dev/1687444366482-2023-06-22T14:32:46.482Z",
     "artifact": ""
   }
 }
