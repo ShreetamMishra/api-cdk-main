@@ -29,8 +29,8 @@ provider:
         - Effect: "Allow"
           Action:
             - "dynamodb:*"
-          Resource: "*"
-            #- !ImportValue '${self:custom.sstApp}-TableArn'
+          Resource: #"*"
+            - !ImportValue '${self:custom.sstApp}-TableArn'
 functions:
   create:
     handler: create.main

@@ -3,4 +3,4 @@
   "type": "@serverless-stack/resources",
   "stage": "dev",
   "region": "ap-south-1"
-  }
+}
