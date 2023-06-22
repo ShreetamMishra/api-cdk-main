@@ -1,6 +1,6 @@
 {
   "name": "notes-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Serverless starter that adds ES6, TypeScript, serverless-offline, linting, environment variables, and unit test support. Part of the [Serverless Stack](http://serverless-stack.com) guide.",
   "main": "handler.js",
   "directories": {
@@ -26,7 +26,6 @@
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
     "serverless": "^3.32.2",
-    "aws-cdk-lib": "2.15.0",
     "stripe": "^12.8.0"
   }
 }
