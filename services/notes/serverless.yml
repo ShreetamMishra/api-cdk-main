@@ -27,10 +27,16 @@ provider:
   iam:
     role:
       statements:
-        - Effect: "Allow"
+        - Effect: 'Allow'
           Action:
-            - "dynamodb:*"
-          Resource: #"*"
+            - 'dynamodb:Scan'
+            - 'dynamodb:Query'
+            - 'dynamodb:GetItem'
+            - 'dynamodb:PutItem'
+            - 'dynamodb:UpdateItem'
+            - 'dynamodb:DeleteItem'
+            - 'dynamodb:DescribeTable'
+          Resource:
             - !ImportValue '${self:custom.sstApp}-TableArn'
 functions:
   create:
