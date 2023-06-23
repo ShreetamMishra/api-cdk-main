@@ -1,4 +1,4 @@
-frameworkVersion: 3.32.2
+# frameworkVersion: 3.32.2
 service: notes-api
 
 package:
@@ -19,7 +19,7 @@ provider:
   runtime: nodejs16.x
   stage: dev
   region: ap-south-1
-  memorySize: 256
+  # memorySize: 256
 
   environment:
     tableName: !ImportValue '${self:custom.sstApp}-TableName'
