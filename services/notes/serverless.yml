@@ -1,4 +1,4 @@
-# frameworkVersion: 3.32.2
+frameworkVersion: 3.32.2
 service: notes-api
 
 package:
