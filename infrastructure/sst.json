@@ -2,5 +2,5 @@
   "name": "notes-infra",
   "type": "@serverless-stack/resources",
   "stage": "dev",
-  "region": "eu-north-1"
+  "region": "ap-south-1"
 }
