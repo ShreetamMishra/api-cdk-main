@@ -1,26 +1,30 @@
-frameworkVersion: 3.32.2
+frameworkVersion: "3.32.2"
+# NOTE: update this with your service name
 service: notes-api
 
+# Create an optimized package for our functions 
 package:
   individually: true
 
 plugins:
-  - serverless-bundle
+  - serverless-bundle # Package our functions with Webpack
   - serverless-offline
-  - serverless-dotenv-plugin
+  - serverless-dotenv-plugin # Load .env as environment variables
+
 custom:
-  # Our stage is based on what is passed in when running serverless
-  # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
-  # Name of the SST app that's deploying our infrastructure
   sstApp: ${self:custom.stage}-notes-infra
+
 provider:
   name: aws
   runtime: nodejs16.x
   stage: dev
-  region: ap-south-1
-  # memorySize: 256
-
+  region: eu-north-1
+  # To load environment variables externally
+  # rename env.example to .env and uncomment
+  # the following line. Also, make sure to not
+  # commit your .env.
+  #
   environment:
     tableName: !ImportValue '${self:custom.sstApp}-TableName'
 
@@ -38,6 +42,7 @@ provider:
             - 'dynamodb:DescribeTable'
           Resource:
             - !ImportValue '${self:custom.sstApp}-TableArn'
+
 functions:
   create:
     handler: create.main
@@ -47,10 +52,8 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+
   get:
-  # Defines an HTTP API endpoint that calls the main function in get.js
-  # - path: url path is /notes/{id}
-  # - method: GET request
     handler: get.main
     events:
       - http:
@@ -85,39 +88,7 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
+
 resources:
   - ${file(resources/api-gateway-errors.yml)}
   - ${file(resources/cognito-policy.yml)}
-  #Resources:
-   #NotesTable:
-    #Type: AWS::DynamoDB::Table
-    #Properties:
-      #AttributeDefinitions:
-        #- AttributeName: userId
-        #  AttributeType: S
-        #- AttributeName: todoId
-        #  AttributeType: S
-       # - AttributeName: createdAt
-        #  AttributeType: S
-      #KeySchema:
-       # - AttributeName: userId
-       #   KeyType: HASH
-        #- AttributeName: todoId
-         # KeyType: RANGE
-      #ProvisionedThroughput:
-       # ReadCapacityUnits: 5
-       # WriteCapacityUnits: 5
-     # LocalSecondaryIndexes:
-       # - IndexName: CreatedAtIndex
-        #  KeySchema:
-         #   - AttributeName: userId
-           #   KeyType: HASH
-            #- AttributeName: createdAt
-              #KeyType: RANGE
-          #Projection:
-           # ProjectionType: ALL
-  
-  # Create our resources with separate CloudFormation templates
-  # API Gateway Errors
-  #- ${file(resources/api-gateway-errors.yml)}
-  #- ${file(resources/cognito-policy.yml)}
